@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dedicatoria Especial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Corazones cayendo */
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      color: rgba(255, 0, 100, 0.5);
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Contenedor principal */
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .dedicatoria {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    .contador {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .fotos img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+
+    iframe {
+      margin-top: 20px;
+      width: 560px;
+      height: 315px;
+      border: none;
+    }
+  </style>
+<style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    /* Botón de reproducción */
+    .play-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #e91e63;
+      color: white;
+      font-size: 30px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .play-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Disco girando */
+    .disc {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #333 40%, #000 100%);
+      border: 5px solid #555;
+      position: relative;
+      animation: spin 4s linear infinite;
+      animation-play-state: paused; /* por defecto detenido */
+    }
+
+    .disc::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: #e91e63;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Nuestra cancion especial <3</h1>
+
+  <div class="player">
+    <button class="play-btn" id="playBtn">▶</button>
+    <div class="disc" id="disc"></div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="audio" src="file:///C:/Users/reyda/Music/Musica%20para%20mi%20mp3/The%20Neighbourhood%20-%20Compass%20(Official%20Audio).mp3"></audio>
+
+  <script>
+    const playBtn = document.getElementById("playBtn");
+    const audio = document.getElementById("audio");
+    const disc = document.getElementById("disc");
+
+    let isPlaying = false;
+
+    playBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        audio.play();
+        playBtn.textContent = "⏸"; // cambia a pausa
+        disc.style.animationPlayState = "running"; // disco gira
+        isPlaying = true;
+      } else {
+        audio.pause();
+        playBtn.textContent = "▶"; // cambia a play
+        disc.style.animationPlayState = "paused"; // disco se detiene
+        isPlaying = false;
+      }
+    });
+  </script>
+</body>
+
+    <!-- Texto dedicatoria -->
+    <div class="dedicatoria">
+      Hola tessi querida, te hago esta pagina solo para que sepas cuanto te amo, se que no es la pagina mas llamativa ni nada, pero es lo que pude conseguir y hacer, quiero que sempas que amo estar a tu lado, me encantas y de verdad que amo todo sobre ti, amo como eres, tu risa, tus actitudes, encerio que de verad estoy super enamorado tuyo, quiero que hagamos las cosas bien para poder durar mucho tiempo juntos y me encantaria ser parte de tu familia, te amo demasiado ❤️
+    </div>
+
+    <!-- Fotos (pon las rutas de tu carpeta) -->
+    <div class="fotos">
+      <img src="file:///C:/Users/reyda/Pictures/imagenes%20descargas/WhatsApp%20Image%202026-03-02%20at%209.44.39%20PM%20(1).jpeg">
+      <img src="file:///C:/Users/reyda/Pictures/imagenes%20descargas/WhatsApp%20Image%202026-03-02%20at%209.44.39%20PM.jpeg" alt="Foto 2">
+      <img src="file:///C:/Users/reyda/Pictures/imagenes%20descargas/WhatsApp%20Image%202026-03-02%20at%209.44.40%20PM%20(1).jpeg" alt="Foto 3">
+    </div>
+
+    <!-- Contador -->
+    <div class="contador" id="contador"></div>
+  </div>
+
+  <script>
+    // Generar corazones cayendo
+    function crearCorazon() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+    setInterval(crearCorazon, 1000);
+
+    // Contador de días/segundos desde una fecha
+    const inicio = new Date("2026-02-21T00:00:00"); // cámbialo a tu fecha especial
+    function actualizarContador() {
+      const ahora = new Date();
+      const diff = ahora - inicio;
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("contador").textContent =
+        `Han pasado ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos desde nuestra fecha especial 💕`;
+    }
+    setInterval(actualizarContador, 1000);
+  </script>
+</body>
+</html>
